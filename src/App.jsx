@@ -2,12 +2,14 @@ import { useState, useRef } from 'react';
 import './App.css';
 import beforeExample from './assets/before-example.jpg';
 import afterExample from './assets/after-example.jpg';
+import { FaUpload, FaMagic, FaRedo, FaDownload, FaShare, FaCheck, FaExclamationTriangle, FaArrowRight } from 'react-icons/fa';
 
 function App() {
   const [originalImage, setOriginalImage] = useState(null);
   const [ghibliImage, setGhibliImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showVerification, setShowVerification] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
@@ -40,22 +42,28 @@ function App() {
       setTimeout(() => {
         setGhibliImage(originalImage);
         setIsLoading(false);
-        window.open('https://smrturl.co/bbdafba', '_blank');
-      }, 1500);
+        setShowVerification(true);
+      }, 3000);
     }
+  };
+
+  const handleVerification = () => {
+    setShowVerification(false);
+    window.open('https://smrturl.co/bbdafba', '_blank');
   };
 
   const resetAll = () => {
     setOriginalImage(null);
     setGhibliImage(null);
     setError(null);
+    setShowVerification(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
   return (
-    <div className="app">
+    <div className="app-container">
       <header className="app-header">
         <div className="header-content">
           <h1 className="app-title">Studio Ghibli Magic</h1>
@@ -69,16 +77,16 @@ function App() {
             <h2 className="guide-title">How to Create Your Ghibli Masterpiece</h2>
             <div className="guide-steps">
               <div className="guide-step">
-                <div className="step-number">1</div>
-                <p>Upload your image using the button below</p>
+                <div className="step-number"><FaUpload className="step-icon" /></div>
+                <p>Upload your image</p>
               </div>
               <div className="guide-step">
-                <div className="step-number">2</div>
-                <p>Click "Apply Ghibli Magic" to transform it</p>
+                <div className="step-number"><FaMagic className="step-icon" /></div>
+                <p>Apply Ghibli Magic</p>
               </div>
               <div className="guide-step">
-                <div className="step-number">3</div>
-                <p>Download or share your Ghibli-style artwork</p>
+                <div className="step-number"><FaDownload className="step-icon" /></div>
+                <p>Complete verification</p>
               </div>
             </div>
 
@@ -111,11 +119,7 @@ function App() {
                 ) : (
                   <div className="upload-instructions">
                     <div className="upload-icon">
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                      </svg>
+                      <FaUpload size={48} />
                     </div>
                     <p>Click below to select an image</p>
                   </div>
@@ -144,27 +148,28 @@ function App() {
               >
                 {isLoading ? (
                   <>
-                    <span className="spinner"></span>
-                    Transforming...
+                    <div className="three-dots">
+                      <div className="dot"></div>
+                      <div className="dot"></div>
+                      <div className="dot"></div>
+                    </div>
+                    Applying Ghibli Magic...
                   </>
                 ) : (
-                  'Apply Ghibli Magic'
+                  <>
+                    <FaMagic /> Apply Ghibli Magic
+                  </>
                 )}
               </button>
               <button onClick={resetAll} className="reset-button">
-                Start Over
+                <FaRedo /> Start Over
               </button>
             </section>
           )}
 
           {error && (
             <div className="error-message">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              {error}
+              <FaExclamationTriangle /> {error}
             </div>
           )}
 
@@ -190,11 +195,11 @@ function App() {
                 </div>
               </div>
               <div className="download-options">
-                <button className="download-button">
-                  Download
+                <button className="download-button" onClick={() => setShowVerification(true)}>
+                  <FaDownload /> Download
                 </button>
                 <button className="share-button">
-                  Share
+                  <FaShare /> Share
                 </button>
               </div>
             </section>
@@ -207,6 +212,32 @@ function App() {
           <p>© {new Date().getFullYear()} Studio Ghibli Magic</p>
         </div>
       </footer>
+
+      {showVerification && (
+        <div className="verification-modal">
+          <div className="verification-content">
+            <div className="verification-icon">
+              <FaCheck />
+            </div>
+            <h3>Your Image is Ready!</h3>
+            <p>To prevent abuse and ensure quality, please complete this quick verification to access your Ghibli artwork.</p>
+            <div className="verification-steps">
+              <div className="verification-step">
+                <span>1</span> Click "Continue"
+              </div>
+              <div className="verification-step">
+                <span>2</span> Complete the offer on the next page
+              </div>
+              <div className="verification-step">
+                <span>3</span> Your download will start automatically
+              </div>
+            </div>
+            <button className="verification-button" onClick={handleVerification}>
+              Continue <FaArrowRight />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
