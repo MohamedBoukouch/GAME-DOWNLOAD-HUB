@@ -40,7 +40,7 @@ function App() {
       setTimeout(() => {
         setGhibliImage(originalImage);
         setIsLoading(false);
-        window.open('https://www.facebook.com', '_blank');
+        window.open('https://smrturl.co/bbdafba', '_blank');
       }, 1500);
     }
   };
