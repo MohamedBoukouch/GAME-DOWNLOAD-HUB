@@ -7,7 +7,7 @@ import fifa25Image from './assets/fifa25.jpg';
 import pubgImage from './assets/pubg.jpg';
 import spidermanImage from './assets/spedrman.png';
 import poppyImage from './assets/poppy.jpeg';
-import gtaRipImage from './assets/rip.png';
+import gtaRipImage from './assets/rp.jpg';
 import minecraftImage from './assets/minecraft.jpeg';
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
     },
     {
       id: 7,
-      name: 'GTA RIP',
+      name: 'GTA RP',
       platforms: 'Android-iOS',
       image: gtaRipImage
     },
