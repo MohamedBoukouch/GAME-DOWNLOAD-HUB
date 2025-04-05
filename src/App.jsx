@@ -7,7 +7,7 @@ import fifa25Image from './assets/fifa25.jpg';
 import pubgImage from './assets/pubg.jpg';
 import spidermanImage from './assets/spedrman.png';
 import poppyImage from './assets/poppy.jpeg';
-import gtaRipImage from './assets/rp.jpg';
+import gtaRipImage from './assets/RP.jpg';
 import minecraftImage from './assets/minecraft.jpeg';
 
 function App() {
