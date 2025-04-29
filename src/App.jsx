@@ -159,9 +159,6 @@ function App() {
           <p className="app-subtitle">{t.subtitle}</p>
         </div>
         <div className="header-controls">
-          <button className="theme-toggle" onClick={toggleDarkMode}>
-            {darkMode ? <FaSun /> : <FaMoon />}
-          </button>
           <div className="language-selector">
             <button 
               className="language-toggle" 
@@ -226,6 +223,11 @@ function App() {
           <p>{t.copyright}</p>
         </div>
       </footer>
+
+      {/* Dark mode toggle in bottom right corner */}
+      <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+        {darkMode ? <FaSun /> : <FaMoon />}
+      </button>
 
       {showVerification && (
         <div className="verification-modal">
