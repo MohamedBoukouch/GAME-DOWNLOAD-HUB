@@ -320,3 +320,306 @@ body {
     padding: 1.5rem;
   }
 }
+/* Add to your App.css */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2980b9;
+  --text-color: #333;
+  --background-color: #f5f5f5;
+  --card-bg: #fff;
+  --header-bg: #2c3e50;
+  --footer-bg: #2c3e50;
+  --button-text: #fff;
+  --border-color: #ddd;
+}
+
+.dark-mode {
+  --primary-color: #3498db;
+  --secondary-color: #2980b9;
+  --text-color: #f5f5f5;
+  --background-color: #121212;
+  --card-bg: #1e1e1e;
+  --header-bg: #121212;
+  --footer-bg: #121212;
+  --button-text: #f5f5f5;
+  --border-color: #333;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.theme-toggle, .language-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.theme-toggle:hover, .language-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.language-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.language-option:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.language-option.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.app-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.game-card {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.game-image-container {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.game-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.game-card:hover .game-image {
+  transform: scale(1.05);
+}
+
+.game-info {
+  padding: 1rem;
+}
+
+.game-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.game-platforms {
+  margin: 0 0 1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.download-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.app-footer {
+  background-color: var(--footer-bg);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.verification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.verification-content {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.verification-icon {
+  font-size: 3rem;
+  color: #2ecc71;
+  margin-bottom: 1rem;
+}
+
+.verification-steps {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.verification-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.verification-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+.verification-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+
+.verification-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* RTL support for Arabic */
+[dir="rtl"] .verification-step span {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .header-controls {
+  right: auto;
+  left: 1rem;
+}
+
+[dir="rtl"] .language-menu {
+  right: auto;
+  left: 0;
+}
