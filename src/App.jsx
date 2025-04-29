@@ -9,6 +9,7 @@ import spidermanImage from './assets/spedrman.png';
 import poppyImage from './assets/poppy.jpeg';
 import gtaRipImage from './assets/RP.jpg';
 import minecraftImage from './assets/minecraft.jpeg';
+import truck from './assets/truck.png';
 
 // Language translations
 const translations = {
@@ -128,6 +129,12 @@ function App() {
       name: 'MINECRAFT',
       platforms: 'Android-iOS',
       image: minecraftImage
+    },
+    {
+      id: 9,
+      name: 'TRUCK SIMULTOR',
+      platforms: 'Android-iOS',
+      image: truck
     }
   ];
 
