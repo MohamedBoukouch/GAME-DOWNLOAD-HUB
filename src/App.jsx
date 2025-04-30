@@ -69,7 +69,7 @@ function App() {
   const [showVerification, setShowVerification] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('ar');
+  const [language, setLanguage] = useState('en'); // Changed default to English
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [showPlatformSelector, setShowPlatformSelector] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -228,16 +228,16 @@ function App() {
             {isLanguageMenuOpen && (
               <div className="language-menu">
                 <button 
+                  className={`language-option ${language === 'en' ? 'active' : ''}`} // Changed order
+                  onClick={() => toggleLanguage('en')}
+                >
+                  English
+                </button>
+                <button 
                   className={`language-option ${language === 'ar' ? 'active' : ''}`}
                   onClick={() => toggleLanguage('ar')}
                 >
                   العربية
-                </button>
-                <button 
-                  className={`language-option ${language === 'en' ? 'active' : ''}`}
-                  onClick={() => toggleLanguage('en')}
-                >
-                  English
                 </button>
               </div>
             )}
