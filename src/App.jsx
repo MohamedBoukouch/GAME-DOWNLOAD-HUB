@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { FaDownload, FaCheck, FaArrowRight, FaSun, FaMoon, FaLanguage } from 'react-icons/fa';
+import { FaDownload, FaCheck, FaArrowRight, FaSun, FaMoon, FaLanguage, FaTimes } from 'react-icons/fa';
 import fortniteImage from './assets/fortnite.jpg';
 import gta5Image from './assets/gta5.jpeg';
 import fifa25Image from './assets/fifa25.jpg';
@@ -18,32 +18,50 @@ const translations = {
     subtitle: "Download the latest games for free for mobile and PC",
     availableGames: "Available Games",
     download: "Download",
-    verificationTitle: "Game ready to download!",
-    verificationText: "To download the game, please complete the following offer successfully and then send a screenshot as proof of completion via private message and the game file will be sent to you",
+    verificationTitle: "Complete Offer to Download",
+    verificationText: "To download this game, please complete a quick offer. This helps us keep the service free.",
     verificationSteps: [
-      "Press 'Continue'",
-      "Complete the offer on the next page",
-      "Send the screenshot via private message showing completion",
-      "I will send you the file privately"
+      "Click 'Complete Offer' button",
+      "Fill in the required information (email/phone/age)",
+      "Submit the form",
+      "Return here to download your game"
     ],
-    continue: "Continue",
-    copyright: `© ${new Date().getFullYear()} GAME DOWNLOAD HUB - All rights reserved`
+    completeOffer: "Complete Offer",
+    copyright: `© ${new Date().getFullYear()} GAME DOWNLOAD HUB - All rights reserved`,
+    selectPlatform: "Select your platform",
+    downloading: "Preparing your download...",
+    downloadReady: "Download Ready!",
+    downloadButton: "Download Now",
+    offerCompleted: "Thank you! Your download will start now",
+    close: "Close",
+    cancel: "Cancel",
+    offerTitle: "Quick Offer Required",
+    offerDescription: "Please complete this quick offer to download the game"
   },
   ar: {
     title: "GAME DOWNLOAD HUB",
     subtitle: "تحميل أحدث الألعاب مجانًا للجوال والكمبيوتر",
     availableGames: "الألعاب المتاحة للتحميل",
     download: "تحميل",
-    verificationTitle: "اللعبة جاهزة للتحميل!",
-    verificationText: "لتحميل اللعبة، يرجى إكمال العرض التالي بنجاح ثم إرسال لقطة شاشة لإثبات الإكمال عبر رسالة خاصة وسيتم إرسال ملف اللعبة إليك",
+    verificationTitle: "أكمل العرض لتحميل اللعبة",
+    verificationText: "لتحميل هذه اللعبة، يرجى إكمال عرض سريع. هذا يساعدنا في الحفاظ على الخدمة مجانية.",
     verificationSteps: [
-      "اضغط على 'متابعة'",
-      "أكمل العرض على الصفحة التالية",
-      "أرسل لقطة الشاشة عبر رسالة خاصة تدل على اتمامك للمهمة",
-      "و سأرسل لك الملف على الخاص"
+      "اضغط على زر 'إكمال العرض'",
+      "املأ المعلومات المطلوبة (بريد إلكتروني/هاتف/عمر)",
+      "إرسال النموذج",
+      "عد هنا لتحميل اللعبة"
     ],
-    continue: "متابعة",
-    copyright: `© ${new Date().getFullYear()} GAME DOWNLOAD HUB - جميع الحقوق محفوظة`
+    completeOffer: "إكمال العرض",
+    copyright: `© ${new Date().getFullYear()} GAME DOWNLOAD HUB - جميع الحقوق محفوظة`,
+    selectPlatform: "اختر نظام التشغيل الخاص بك",
+    downloading: "جاري تجهيز التحميل...",
+    downloadReady: "التحميل جاهز!",
+    downloadButton: "تحميل الآن",
+    offerCompleted: "شكراً لك! سوف يبدأ التحميل الآن",
+    close: "إغلاق",
+    cancel: "إلغاء",
+    offerTitle: "عرض سريع مطلوب",
+    offerDescription: "يرجى إكمال هذا العرض السريع لتحميل اللعبة"
   }
 };
 
@@ -51,19 +69,21 @@ function App() {
   const [showVerification, setShowVerification] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [language, setLanguage] = useState('ar'); // Default to Arabic
+  const [language, setLanguage] = useState('ar');
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const [showPlatformSelector, setShowPlatformSelector] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadReady, setDownloadReady] = useState(false);
+  const [offerCompleted, setOfferCompleted] = useState(false);
 
   const t = translations[language];
 
   useEffect(() => {
-    // Check for saved theme preference
     const savedTheme = localStorage.getItem('darkMode');
     if (savedTheme) {
       setDarkMode(savedTheme === 'true');
     }
 
-    // Check for saved language preference
     const savedLanguage = localStorage.getItem('language');
     if (savedLanguage && translations[savedLanguage]) {
       setLanguage(savedLanguage);
@@ -71,7 +91,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Apply dark mode class to body
     if (darkMode) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('darkMode', 'true');
@@ -85,67 +104,100 @@ function App() {
     {
       id: 1,
       name: language === 'ar' ? 'فورتنايت موبايل' : 'FORTNITE MOBILE',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: fortniteImage
     },
     {
       id: 2,
       name: language === 'ar' ? 'جيتا 5' : 'GTA V',
-      platforms: 'Android-iOS-PC',
+      platforms: ['Android', 'iOS', 'Windows'],
       image: gta5Image
     },
     {
       id: 3,
       name: language === 'ar' ? 'فيفا 25' : 'FIFA 25',
-      platforms: 'Android-iOS-PC',
+      platforms: ['Android', 'iOS', 'Windows'],
       image: fifa25Image
     },
     {
       id: 4,
       name: language === 'ar' ? 'ببجي موبايل' : 'PUBG MOBILE',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: pubgImage
     },
     {
       id: 5,
       name: language === 'ar' ? 'سبايدرمان' : 'SPIDERMAN',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: spidermanImage
     },
     {
       id: 6,
       name: language === 'ar' ? 'بوبي بلاي تايم' : 'POPPY PLAYTIME',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: poppyImage
     },
     {
       id: 7,
       name: language === 'ar' ? 'جيتا آر بي' : 'GTA RP',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: gtaRipImage
     },
     {
       id: 8,
       name: 'MINECRAFT',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: minecraftImage
     },
     {
       id: 9,
       name: 'TRUCK SIMULTOR',
-      platforms: 'Android-iOS',
+      platforms: ['Android', 'iOS'],
       image: truck
     }
   ];
 
   const handleDownload = (game) => {
     setSelectedGame(game);
+    if (game.platforms.length > 1) {
+      setShowPlatformSelector(true);
+    } else {
+      setShowVerification(true);
+    }
+  };
+
+  const startDownload = (platform) => {
+    setShowPlatformSelector(false);
     setShowVerification(true);
   };
 
-  const handleVerification = () => {
-    setShowVerification(false);
+  const completeOffer = () => {
+    // Open offer page in new tab
     window.open('https://smrturl.co/24ccacb', '_blank');
+    
+    // Simulate user completing the offer
+    setShowVerification(false);
+    setIsDownloading(true);
+    
+    setTimeout(() => {
+      setIsDownloading(false);
+      setOfferCompleted(true);
+      setDownloadReady(true);
+    }, 2000);
+  };
+
+  const startFileDownload = () => {
+    // In a real app, this would trigger the actual file download
+    alert('Download would start now!');
+    resetDownload();
+  };
+
+  const resetDownload = () => {
+    setIsDownloading(false);
+    setDownloadReady(false);
+    setOfferCompleted(false);
+    setShowVerification(false);
+    setShowPlatformSelector(false);
   };
 
   const toggleDarkMode = () => {
@@ -210,7 +262,7 @@ function App() {
                   </div>
                   <div className="game-info">
                     <h3 className="game-name">{game.name}</h3>
-                    <p className="game-platforms">{game.platforms}</p>
+                    <p className="game-platforms">{game.platforms.join(' - ')}</p>
                     <button 
                       onClick={() => handleDownload(game)}
                       className="download-button"
@@ -231,14 +283,72 @@ function App() {
         </div>
       </footer>
 
-      {/* Dark mode toggle in bottom right corner */}
       <button className="dark-mode-toggle" onClick={toggleDarkMode}>
         {darkMode ? <FaSun /> : <FaMoon />}
       </button>
 
+      {/* Platform Selector Modal */}
+      {showPlatformSelector && (
+        <div className="verification-modal">
+          <div className="verification-content">
+            <button className="close-modal" onClick={resetDownload}>
+              <FaTimes />
+            </button>
+            <h3>{t.selectPlatform}</h3>
+            <div className="platform-options">
+              {selectedGame?.platforms.map((platform, index) => (
+                <button 
+                  key={index} 
+                  className="platform-button"
+                  onClick={() => startDownload(platform)}
+                >
+                  {platform}
+                </button>
+              ))}
+            </div>
+            <button className="verification-button cancel-button" onClick={resetDownload}>
+              {t.cancel}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Downloading Modal */}
+      {isDownloading && (
+        <div className="verification-modal">
+          <div className="verification-content">
+            <div className="loading-spinner"></div>
+            <h3>{t.downloading}</h3>
+            <p>{offerCompleted ? t.offerCompleted : t.offerDescription}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Download Ready Modal */}
+      {downloadReady && (
+        <div className="verification-modal">
+          <div className="verification-content">
+            <div className="verification-icon">
+              <FaCheck />
+            </div>
+            <h3>{t.downloadReady}</h3>
+            <button 
+              className="verification-button" 
+              onClick={startFileDownload}
+            >
+              {t.downloadButton} <FaDownload />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Offer Verification Modal */}
       {showVerification && (
         <div className="verification-modal">
           <div className="verification-content">
+            <button className="close-modal" onClick={resetDownload}>
+              <FaTimes />
+            </button>
             <div className="verification-icon">
               <FaCheck />
             </div>
@@ -251,8 +361,11 @@ function App() {
                 </div>
               ))}
             </div>
-            <button className="verification-button" onClick={handleVerification}>
-              {t.continue} <FaArrowRight />
+            <button 
+              className="verification-button" 
+              onClick={completeOffer}
+            >
+              {t.completeOffer} <FaArrowRight />
             </button>
           </div>
         </div>
