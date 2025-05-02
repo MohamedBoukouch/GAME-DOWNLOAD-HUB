@@ -11,6 +11,7 @@ import gtaRipImage from './assets/RP.jpg';
 import minecraftImage from './assets/minecraft.jpeg';
 import truck from './assets/truck.png';
 import sonic from './assets/sonic.jpg';
+import nfl from './assets/nfl.jpeg';
 
 // Language translations
 const translations = {
@@ -110,9 +111,9 @@ function App() {
     },
     {
       id: 2,
-      name: language === 'ar' ? 'جيتا 5' : 'GTA V',
+      name: language === 'ar' ? 'مادين نفل' : 'MADDEN NFL',
       platforms: ['Android', 'iOS', 'Windows'],
-      image: gta5Image
+      image: nfl
     },
     {
       id: 3,
@@ -161,6 +162,12 @@ function App() {
       name: language === 'ar' ? 'فورتنايت موبايل' : 'FORTNITE MOBILE',
       platforms: ['Android', 'iOS'],
       image: fortniteImage
+    },
+    {
+      id: 11,
+      name: language === 'ar' ? 'جيتا 5' : 'GTA V',
+      platforms: ['Android', 'iOS', 'Windows'],
+      image: gta5Image
     },
   ];
 
