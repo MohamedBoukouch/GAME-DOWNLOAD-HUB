@@ -10,6 +10,7 @@ import poppyImage from './assets/poppy.jpeg';
 import gtaRipImage from './assets/RP.jpg';
 import minecraftImage from './assets/minecraft.jpeg';
 import truck from './assets/truck.png';
+import sonic from './assets/sonic.jpg';
 
 // Language translations
 const translations = {
@@ -103,9 +104,9 @@ function App() {
   const games = [
     {
       id: 1,
-      name: language === 'ar' ? 'فورتنايت موبايل' : 'FORTNITE MOBILE',
+      name: language === 'ar' ? 'صونيك موبايل' : 'Sonic the Hedgehog',
       platforms: ['Android', 'iOS'],
-      image: fortniteImage
+      image: sonic
     },
     {
       id: 2,
@@ -154,7 +155,13 @@ function App() {
       name: 'TRUCK SIMULTOR',
       platforms: ['Android', 'iOS'],
       image: truck
-    }
+    },
+    {
+      id: 10,
+      name: language === 'ar' ? 'فورتنايت موبايل' : 'FORTNITE MOBILE',
+      platforms: ['Android', 'iOS'],
+      image: fortniteImage
+    },
   ];
 
   const handleDownload = (game) => {
