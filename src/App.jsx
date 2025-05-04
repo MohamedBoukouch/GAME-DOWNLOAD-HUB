@@ -12,6 +12,7 @@ import minecraftImage from './assets/minecraft.jpeg';
 import truck from './assets/truck.png';
 import sonic from './assets/sonic.jpg';
 import nfl from './assets/nfl.jpeg';
+import baseballe9 from './assets/baseball.jpg';
 
 // Language translations
 const translations = {
@@ -117,9 +118,9 @@ function App() {
     },
     {
       id: 3,
-      name: language === 'ar' ? 'فيفا 25' : 'FIFA 25',
+      name: language === 'ar' ? 'BASEBALL 9' : 'BASEBALL 9',
       platforms: ['Android', 'iOS', 'Windows'],
-      image: fifa25Image
+      image: baseballe9
     },
     {
       id: 4,
@@ -168,6 +169,12 @@ function App() {
       name: language === 'ar' ? 'جيتا 5' : 'GTA V',
       platforms: ['Android', 'iOS', 'Windows'],
       image: gta5Image
+    },
+    {
+      id: 12,
+      name: language === 'ar' ? 'فيفا 25' : 'FIFA 25',
+      platforms: ['Android', 'iOS', 'Windows'],
+      image: fifa25Image
     },
   ];
 
